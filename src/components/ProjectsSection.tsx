@@ -232,7 +232,8 @@ const PdfViewerModal = ({ isOpen, onClose, projectSlug, title }: {
     blobUrlsRef.current = new Map();
     setBlobReady(0);
 
-    fetch(`/projects/${projectSlug}/manifest.json`)
+    const base = import.meta.env.BASE_URL;
+    fetch(`${base}projects/${projectSlug}/manifest.json`)
       .then(r => (r.ok ? r.json() : null))
       .then(data => {
         if (data?.files?.length) {

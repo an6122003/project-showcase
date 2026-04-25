@@ -49,7 +49,7 @@ function servePdfs(): Plugin {
         const pdfPath = decodeURIComponent(rawUrl.replace('/api/asset/', '').split('?')[0]);
         const filePath = path.join(publicDir, pdfPath);
 
-        if (fs.existsSync(filePath) && pdfPath.toLowerCase().endsWith('.pdf')) {
+        if (fs.existsSync(filePath) && (pdfPath.toLowerCase().endsWith('.bin') || pdfPath.toLowerCase().endsWith('.pdf'))) {
           res.writeHead(200, {
             // Disguise as generic binary — IDM won't recognize it as PDF
             'Content-Type': 'application/octet-stream',
@@ -70,7 +70,7 @@ function servePdfs(): Plugin {
       // Block direct PDF file access from the public directory
       server.middlewares.use((req, res, next) => {
         const rawUrl = (req.url || '').split('?')[0].toLowerCase();
-        if (rawUrl.endsWith('.pdf') && !rawUrl.startsWith('/api/')) {
+        if ((rawUrl.endsWith('.pdf') || rawUrl.endsWith('.bin')) && !rawUrl.startsWith('/api/')) {
           res.writeHead(403, { 'Content-Type': 'text/plain' });
           res.end('Direct PDF access is blocked. Use the in-app viewer.');
           return;

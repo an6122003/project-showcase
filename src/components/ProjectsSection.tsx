@@ -315,7 +315,7 @@ const PdfViewerModal = ({ isOpen, onClose, projectSlug, title }: {
   const isCurrentReady = pdfDataStore.has(currentUrl);
   const currentBlobUrl = blobUrlsRef.current.get(currentUrl);
   const showUrl = displayUrl && pdfDataStore.has(displayUrl) ? displayUrl : '';
-  const currentFilename = currentUrl.split('/').pop() || 'document.pdf';
+  const currentFilename = (currentUrl.split('/').pop() || 'document.pdf').replace(/\.bin$/, '.pdf');
 
   const handleOpenInNewTab = (e: React.MouseEvent) => {
     e.preventDefault();

@@ -10,7 +10,7 @@ import { fetchPdf } from '../utils/fetchPdf';
 // Reuse the same worker setup
 pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min.mjs`;
 
-const cvUrl = '/projects/cv/CV_PM_1Page.pdf';
+const cvUrl = '/projects/cv/CV_PM_1Page.bin';
 
 export function HeroSection() {
   const [isCvOpen, setIsCvOpen] = useState(false);

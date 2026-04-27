@@ -5,7 +5,7 @@ import { PixelComputer } from './PixelIcons';
 
 export function AboutSection() {
   return (
-    <section className="py-24 bg-[#fdfaf5]" id="about">
+    <section className="py-24 bg-[#fdfaf5]" id="experience">
       <Container>
         <div className="flex flex-col lg:flex-row gap-16">
           
@@ -62,7 +62,7 @@ export function AboutSection() {
               
               <div className="relative">
                 <div className="absolute w-5 h-5 bg-black rounded-full -left-[42px] top-1 border-4 border-[#fdfaf5]"></div>
-                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000]">
+                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                   <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
                     <Briefcase className="w-4 h-4" /> May 2024 - Present
                   </div>
@@ -76,7 +76,7 @@ export function AboutSection() {
 
               <div className="relative">
                 <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
-                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000]">
+                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                   <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
                     <Briefcase className="w-4 h-4" /> Sep 2023 - Dec 2023
                   </div>
@@ -90,7 +90,7 @@ export function AboutSection() {
 
               <div className="relative">
                 <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
-                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000]">
+                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                   <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
                     <Briefcase className="w-4 h-4" /> Jul 2022 - Jan 2023
                   </div>
@@ -104,7 +104,7 @@ export function AboutSection() {
 
               <div className="relative">
                 <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
-                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000]">
+                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                   <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
                     <Briefcase className="w-4 h-4" /> Jun 2022 - May 2023
                   </div>
@@ -118,7 +118,7 @@ export function AboutSection() {
 
               <div className="relative">
                 <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
-                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000]">
+                <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                   <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
                     <Briefcase className="w-4 h-4" /> Oct 2021 - Nov 2022
                   </div>
@@ -132,21 +132,21 @@ export function AboutSection() {
 
               <div className="relative">
                 <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
-                <div className="bg-blue-50 p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000]">
+                <div className="bg-blue-50 p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                   <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
                     <GraduationCap className="w-4 h-4" /> Graduation
                   </div>
                   <h4 className="text-xl font-bold text-black mb-1">Bachelor of Info Technology</h4>
                   <p className="text-brand-subtext font-bold mb-3">RMIT University (GPA: 3.6/4.0)</p>
                   <p className="text-sm text-gray-700 leading-relaxed">
-                    Scholar's List. National Champion: RMIT Business Analytics Competition. Top 30 National: Unilever Future Leader League.
+                    Scholar's List.
                   </p>
                 </div>
               </div>
 
             </div>
 
-            <div className="mx-auto lg:mx-0 mt-6 lg:mt-2">
+            <div className="flex flex-wrap gap-4 mx-auto lg:mx-0 mt-6 lg:mt-4">
                <a 
                  href="https://www.linkedin.com/in/an-nguyen-quoc/" 
                  target="_blank" 
@@ -154,7 +154,15 @@ export function AboutSection() {
                  className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white hover:bg-gray-800 rounded-lg font-bold text-lg border-2 border-black shadow-[4px_4px_0_0_#000] hover:shadow-[2px_2px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
                >
                  <Linkedin className="w-5 h-5 fill-current" />
-                 Connect on LinkedIn
+                 Connect
+               </a>
+               <a 
+                 href="https://www.linkedin.com/in/an-nguyen-quoc/details/experience/" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black hover:bg-gray-50 rounded-lg font-bold text-lg border-2 border-black shadow-[4px_4px_0_0_#000] hover:shadow-[2px_2px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+               >
+                 View Full Experience
                </a>
             </div>
 

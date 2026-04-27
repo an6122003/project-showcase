@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import { PixelAvatar } from './PixelIcons';
+import { PixelAvatar, TikTokIcon } from './PixelIcons';
 import { Button, Container, Modal } from './ui';
-import { Github, Linkedin, Mail, ArrowRight, Download, ExternalLink, FileText, ChevronLeft, ChevronRight, Loader } from 'lucide-react';
+import { Github, Linkedin, Mail, Youtube, Facebook, ArrowRight, Download, ExternalLink, FileText, ChevronLeft, ChevronRight, Loader } from 'lucide-react';
 import { fetchPdf } from '../utils/fetchPdf';
 
 // Reuse the same worker setup
@@ -12,7 +12,122 @@ pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min
 
 const cvUrl = '/projects/cv/CV_PM_1Page.bin';
 
+const codeSnippet = `
+function initializeMultiAgentPipeline(config: PipelineConfig) {
+  const { models, routingStrategy, maxRetries } = config;
+  
+  // Cost-aware multi-LLM routing
+  const router = new ModelRouter({
+    primary: models.claude,
+    fallback: models.gemini,
+    local: models.ollama
+  });
+
+  return async function processArticle(sourceId: string) {
+    try {
+      const rawData = await fetchSource(sourceId);
+      const metrics = await analyzeCost(rawData.length);
+      
+      const model = router.selectOptimal(metrics);
+      const optimizedContent = await model.generate(rawData);
+      
+      await publishToHeadlessCMS({
+        content: optimizedContent,
+        seoTags: generateSEOMetadata(optimizedContent)
+      });
+      
+      return { status: 'success', cost: metrics.projectedCost };
+    } catch (error) {
+      if (maxRetries > 0) return retryPipeline(sourceId);
+      throw new PipelineError('Pipeline failed', error);
+    }
+  }
+}
+`.trim();
+
+const CodeScroll = () => (
+  <div className="animate-scroll-code flex flex-col gap-8 h-[200%]">
+    <pre>{codeSnippet}</pre>
+    <pre>{codeSnippet}</pre>
+    <pre>{codeSnippet}</pre>
+    <pre>{codeSnippet}</pre>
+    <pre>{codeSnippet}</pre>
+    <pre>{codeSnippet}</pre>
+  </div>
+);
+
+const WireframeSVG = () => (
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 opacity-40">
+    <defs>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ccc" strokeWidth="0.5" />
+      </pattern>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#999" />
+      </marker>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid)" />
+
+    <rect x="5%" y="20%" width="25%" height="15%" rx="4" fill="none" stroke="#999" strokeWidth="2" strokeDasharray="4 4" className="animate-pulse" />
+    <rect x="7%" y="23%" width="10%" height="2%" fill="#ccc" className="animate-[pulse_2s_ease-in-out_infinite]" />
+    <rect x="7%" y="27%" width="20%" height="1%" fill="#ccc" className="animate-[pulse_2.5s_ease-in-out_infinite]" />
+    <rect x="7%" y="30%" width="15%" height="1%" fill="#ccc" className="animate-[pulse_3s_ease-in-out_infinite]" />
+
+    <path d="M 30% 27% L 70% 27%" stroke="#999" strokeWidth="2" strokeDasharray="8 8" markerEnd="url(#arrow)" className="animate-[flowLine_0.5s_linear_infinite]" />
+
+    <rect x="70%" y="15%" width="30%" height="25%" rx="4" fill="none" stroke="#999" strokeWidth="2" className="animate-pulse" style={{ animationDuration: '3s' }} />
+    <circle cx="85%" cy="25%" r="4%" fill="none" stroke="#ccc" strokeWidth="2" strokeDasharray="4 4" className="animate-[spin_12s_linear_infinite]" style={{ transformOrigin: '85% 25%' }} />
+    <circle cx="85%" cy="25%" r="1.5%" fill="#ccc" className="animate-ping" style={{ animationDuration: '3s' }} />
+    <rect x="73%" y="32%" width="24%" height="4%" rx="2" fill="#ccc" className="animate-[pulse_1.5s_ease-in-out_infinite]" />
+
+    <path d="M 85% 40% L 85% 55%" stroke="#999" strokeWidth="2" strokeDasharray="8 8" markerEnd="url(#arrow)" className="animate-[flowLine_0.8s_linear_infinite]" />
+
+    <rect x="70%" y="55%" width="30%" height="20%" rx="4" fill="none" stroke="#999" strokeWidth="2" className="animate-pulse" style={{ animationDuration: '4s' }} />
+    <rect x="73%" y="60%" width="10%" height="8%" rx="2" fill="#ccc" className="animate-[pulse_2s_ease-in-out_infinite]" />
+    <rect x="87%" y="60%" width="10%" height="8%" rx="2" fill="#ccc" className="animate-[pulse_2.5s_ease-in-out_infinite]" />
+  </svg>
+);
+
+const bgStyles = `
+  @keyframes scrollCode {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  .animate-scroll-code {
+    animation: scrollCode 20s linear infinite;
+  }
+  @keyframes flowLine {
+    to { stroke-dashoffset: -8; }
+  }
+  .animate-flow-line {
+    animation: flowLine 1s linear infinite;
+  }
+`;
+
+function useMagnetic() {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!ref.current) return;
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
+    const x = clientX - (left + width / 2);
+    const y = clientY - (top + height / 2);
+    ref.current.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+  };
+
+  const handleMouseLeave = () => {
+    if (!ref.current) return;
+    ref.current.style.transform = `translate(0px, 0px)`;
+  };
+
+  return { ref, handleMouseMove, handleMouseLeave };
+}
+
 export function HeroSection() {
+  const [bgState, setBgState] = useState<'none' | 'how' | 'why'>('none');
+  const magnetic = useMagnetic();
+
   const [isCvOpen, setIsCvOpen] = useState(false);
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
@@ -99,33 +214,93 @@ export function HeroSection() {
   };
 
   return (
-    <section className="py-24 bg-white" id="about">
+    <section className="py-24 bg-white relative overflow-hidden" id="about">
+      <style>{bgStyles}</style>
+
+      {/* Backgrounds */}
+      <div className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-in-out z-0 ${bgState === 'how' ? 'opacity-100' : 'opacity-0'}`}>
+        {/* How: Scrolling code */}
+        <div className="absolute inset-0 overflow-hidden text-gray-800 font-mono text-sm leading-relaxed whitespace-pre opacity-30 p-8 select-none">
+          <CodeScroll />
+        </div>
+      </div>
+
+      <div className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-in-out z-0 ${bgState === 'why' ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Why: Wireframes SVG */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <WireframeSVG />
+        </div>
+      </div>
+
       <Container>
-        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
-          <div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
-            <img src={`${import.meta.env.BASE_URL}avatar.png`} alt="An Nguyen Quoc" className="w-full h-full object-cover rounded-[2rem] border-4 border-black shadow-[6px_6px_0_0_#000] rotate-3 hover:rotate-0 transition-transform duration-300" />
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 lg:gap-20">
+          <div className="flex flex-col items-center gap-4 relative">
+            <div className="w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0">
+              <img src={`${import.meta.env.BASE_URL}avatar.png`} alt="An Nguyen Quoc" className="w-full h-full object-cover rounded-[2rem] border-4 border-black shadow-[6px_6px_0_0_#000] rotate-3 hover:rotate-0 transition-transform duration-300 relative z-10 bg-white" />
+            </div>
+
+            {/* Active Builder Pulse */}
+            <div className="flex items-center gap-2 border-2 border-black bg-white shadow-[2px_2px_0_0_#000] px-3 py-1.5 rounded-md absolute -bottom-6 md:-bottom-8 z-20">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+              <span className="text-[10px] md:text-xs font-bold font-mono tracking-tight uppercase whitespace-nowrap">
+                LATEST BUILD: AI-Powered Vietnamese Tech News Platform
+              </span>
+            </div>
           </div>
-          
-          <div className="flex flex-col items-start max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Hey, I'm An!</h1>
-            <p className="text-lg md:text-xl font-medium text-brand-text mb-4">
-              Data-driven Software Engineer bridging technical complexity with seamless user experiences.
+
+          <div className="flex flex-col items-start max-w-2xl mt-8 md:mt-0">
+            <div className="inline-flex items-center gap-3 border-2 border-black bg-white px-4 py-1.5 mb-6 shadow-[3px_3px_0_0_#000] rotate-[-1deg] hover:rotate-0 transition-transform">
+              <span className="font-bold text-sm md:text-base uppercase tracking-widest">An Nguyen</span>
+              <span className="w-1.5 h-1.5 bg-black rounded-full"></span>
+              <span className="font-mono text-xs md:text-sm font-semibold uppercase tracking-wider text-gray-700">PRODUCT BUILDER / CONTENT CREATOR</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight">
+              Building the <span
+                onMouseEnter={() => setBgState('how')}
+                onMouseLeave={() => setBgState('none')}
+                className="cursor-crosshair border-b-4 border-dashed border-gray-300 hover:border-black transition-colors"
+              >"How."</span> <br />
+              Obsessing over the <span
+                onMouseEnter={() => setBgState('why')}
+                onMouseLeave={() => setBgState('none')}
+                className="cursor-crosshair border-b-4 border-dashed border-gray-300 hover:border-black transition-colors"
+              >"Why."</span>
+            </h1>
+            <p className="text-lg md:text-xl font-medium text-brand-text mb-4 leading-relaxed">
+              Most engineers only care about how a system works. I am obsessed with why it matters to the user.
             </p>
             <p className="text-base text-brand-subtext mb-8 leading-relaxed">
-              Currently transitioning into Product Management. I help businesses and teams translate complex requirements into scalable, intuitive products.
+              For the past two years, I have operated as a Software Engineer with a Product Manager's mindset, translating deep technical complexity into products that actually scale. I design and build systems ranging from autonomous AI pipelines to machine learning models. Beyond engineering, I solve high stakes business and marketing cases for global brands like Pizza Hut and Unilever. This is where technical precision meets business impact.
             </p>
-            
-            <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+
+            <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto mb-8">
               <Button className="flex items-center gap-2" onClick={() => setIsCvOpen(true)}>
                 View My CV / Resume
                 <ArrowRight size={16} strokeWidth={3} />
               </Button>
-              
-              <div className="flex items-center gap-4 text-brand-subtext">
-                <a href="https://www.linkedin.com/in/an-nguyen-quoc/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><Linkedin size={24} /></a>
-                <a href="https://github.com/an6122003" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><Github size={24} /></a>
-                <a href="mailto:an6122003@gmail.com" className="hover:text-black transition-colors"><Mail size={24} /></a>
-              </div>
+
+              <a
+                href="#projects"
+                ref={magnetic.ref}
+                onMouseMove={magnetic.handleMouseMove}
+                onMouseLeave={magnetic.handleMouseLeave}
+                className="font-bold text-sm underline underline-offset-4 decoration-2 decoration-brand-subtext hover:decoration-black hover:text-black transition-colors duration-200 ease-out inline-block px-4 py-2"
+                style={{ transition: 'transform 0.1s ease-out' }}
+              >
+                Explore my work ↓
+              </a>
+            </div>
+
+            <div className="flex items-center gap-4 text-brand-subtext">
+              <a href="https://www.linkedin.com/in/an-nguyen-quoc/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><Linkedin size={24} /></a>
+              <a href="https://github.com/an6122003" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><Github size={24} /></a>
+              <a href="https://www.youtube.com/@anndaynee" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><Youtube size={24} /></a>
+              <a href="https://www.facebook.com/anmamxanhbaby/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><Facebook size={24} /></a>
+              <a href="https://www.tiktok.com/@anndaynee" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><TikTokIcon className="w-6 h-6" /></a>
+              <a href="mailto:an6122003@gmail.com" className="hover:text-black transition-colors"><Mail size={24} /></a>
             </div>
           </div>
         </div>

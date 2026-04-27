@@ -4,7 +4,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import { Container, Tag, Modal } from './ui';
 import { PixelComputer, PixelHammer, PixelCheck, PixelGlobe, PixelCamera } from './PixelIcons';
-import { FileText, ChevronLeft, ChevronRight, Download, ExternalLink, Loader } from 'lucide-react';
+import { FileText, ChevronLeft, ChevronRight, Download, ExternalLink, Loader, BarChart, ShoppingCart, Bot, MonitorSmartphone, ShieldCheck, Gavel, Sparkles } from 'lucide-react';
 import { fetchPdf } from '../utils/fetchPdf';
 
 // Configure pdf.js worker
@@ -308,7 +308,7 @@ const PdfViewerModal = ({ isOpen, onClose, projectSlug, title }: {
         setIsFetching(false);
         setFetchError(true);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, pdfUrls, currentIdx]);
 
   const currentUrl = pdfUrls[currentIdx] ?? '';
@@ -448,94 +448,111 @@ interface Project {
   pdfLabel?: string;
   noCoverPreview?: boolean;
   slides?: { title: string; content: string }[];
+  badge?: string;
+  isLive?: boolean;
+  footerText?: string;
+  customHoverClass?: string;
 }
 
 const projects: Project[] = [
   {
     id: 3,
-    title: 'RetroLab — AI Tech News Platform',
-    role: 'Product Manager / Engineer',
-    description: 'Directed the 0-to-1 lifecycle of an AI media platform for the Vietnamese market. Built automated multi-LLM content pipelines reducing editorial production time by 90%. Integrated a zero-cost headless CMS using Notion and Next.js.',
-    icon: PixelComputer,
-    tags: [{ label: 'Web Dev', color: 'pink' }, { label: 'AI', color: 'purple' }, { label: 'Full Stack', color: 'green' }],
+    title: 'RetroLab: AI-Powered Tech News Platform',
+    role: 'Founder & Technical Architect · Digital Media Platform',
+    description: 'RetroLab is an automated, AI-driven tech news ecosystem designed to disrupt the Vietnamese digital media market. I architected a headless, multi-agent pipeline that automates the entire editorial lifecycle—from discovery and deduplication to cultural adaptation and SEO optimization—achieving a 99% automation rate and a 2-minute time-to-publish. By implementing a cost-aware multi-LLM routing strategy (Gemini, Claude, Ollama) and a FinOps dashboard, the platform scales to 50+ articles daily while maintaining a near-zero marginal cost of $0.001 per article. This project demonstrates a full-cycle transition from product vision to a high-volume, low-overhead live deployment.',
+    icon: Sparkles,
+    tags: [{ label: 'AI Automation', color: 'purple' }, { label: 'FinOps & Unit Economics', color: 'green' }, { label: 'Next.js & LLMs', color: 'pink' }, { label: 'Product Architecture', color: 'gray' }],
     projectSlug: 'retrolab',
     coverImage: '/projects/retrolab/cover.png',
     externalUrl: 'https://portfolio.retrolab.com.vn/',
-    externalLabel: 'View Portfolio Page',
+    externalLabel: 'View Portfolio Site',
     hasPdf: false,
+    customHoverClass: 'hover:border-[#38bdf8] hover:shadow-[8px_8px_0_0_#38bdf8]',
   },
   {
     id: 1,
-    title: 'ZaloPay — Expired PIN Management',
-    role: 'Associate Product Owner · User Platform',
-    description: "Led the redesign of the expired PIN management flow for ZaloPay's user platform. Analyzed conversion drop-offs, simplified authentication steps, and implemented a context-aware biometric solution that improved successful transactions by 15%.",
-    icon: PixelGlobe,
-    tags: [{ label: 'FinTech', color: 'pink' }, { label: 'UX Research', color: 'purple' }, { label: 'Product', color: 'green' }],
+    title: 'ZaloPay: Compliant PIN Expiration Management',
+    role: 'Associate Product Owner · User Platform Case Study',
+    description: 'Designing a strategy to manage ZaloPay’s mandatory 12-month PIN expiration without breaking critical payment journeys. I proposed an "Interrupt & Resume" framework that preserves session states, allowing users to complete security resets mid-payment without losing their progress. The implementation features a tiered notification system that escalates urgency from T-30 to T-0 and utilizes a canary rollout to protect high-frequency transaction volume. This approach ensures full compliance with Circular 50/2024/TT-NHNN while maintaining a targeted 99% completion rate for interrupted payments.',
+    icon: ShieldCheck,
+    tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'Fintech Compliance', color: 'green' }, { label: 'UX Optimization', color: 'pink' }, { label: 'Risk Management', color: 'gray' }],
     projectSlug: 'zalopay-case-study',
     coverImage: '/projects/zalopay-case-study/cover.png',
     hasPdf: true,
-    pdfLabel: 'View Case Study',
+    pdfLabel: 'View Product Solution',
+    badge: 'ZaloPay Case Study',
+    customHoverClass: 'hover:border-[#0f9a8d] hover:shadow-[8px_8px_0_0_#0f9a8d]',
   },
   {
     id: 2,
-    title: 'Zalo Product Management Trainee 2023',
-    role: 'PMT Candidate · Assignment Submission',
-    description: "Completed the Zalo PMT 2023 fast-track program assignment. Delivered a comprehensive product analysis, user research, and strategic recommendation for Zalo's product ecosystem.",
-    icon: PixelCamera,
-    tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'User Research', color: 'pink' }],
+    title: 'Zalo: Multi-Device Ecosystem for Business',
+    role: 'Product Management Case Study · Zalo Product Management Trainee 2023',
+    description: 'Designing a strategic roadmap to scale Zalo\'s professional ecosystem by resolving the critical "single-device" limitation for business users. We proposed a tiered simultaneous login framework enabling Zalo Official Accounts and Business tiers to operate across up to four devices while ensuring data integrity. To mitigate security risks, the solution features a centralized management dashboard and a temporary cloud synchronization system to prevent message loss during device transitions. This project targets a 30% increase in premium conversions by aligning Zalo\'s technical architecture with the operational needs of modern SMEs.',
+    icon: MonitorSmartphone,
+    tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'Feature Design', color: 'green' }, { label: 'Business Growth', color: 'pink' }, { label: 'UX/UI Mockups', color: 'gray' }],
     projectSlug: 'zalo-pmt-2023',
     coverImage: '/projects/zalo-pmt-2023/cover.png',
     hasPdf: true,
-    pdfLabel: 'View Submission',
+    pdfLabel: 'View Product Roadmap',
+    customHoverClass: 'hover:border-[#0068ff] hover:shadow-[8px_8px_0_0_#0068ff]',
   },
   {
     id: 4,
-    title: 'Auction Product Design',
-    role: 'Core Product Owner',
-    description: 'Acted as the Product Owner to define the MVP for a live-bidding and earn-turns mechanic. Negotiated feature scope against engineering constraints and mapped end-to-end user journeys for the auction platform.',
-    icon: PixelHammer,
-    tags: [{ label: 'Strategy', color: 'green' }, { label: 'E-com', color: 'gray' }, { label: 'Product Design', color: 'purple' }],
+    title: 'Auction Game Product Design',
+    role: 'Product Owner & Lead UI/UX Designer',
+    description: 'Defining the Product Design for a live e-commerce auction feature integrated with a gamified "earn-turns" mechanic. I mapped end-to-end user journeys and managed feature scoping by negotiating design goals against engineering constraints. The final solution includes a real-time bidding interface and task-based rewards designed to drive user engagement and platform retention.',
+    icon: Gavel,
+    tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'MVP Scoping', color: 'gray' }, { label: 'UI/UX Design', color: 'pink' }, { label: 'Gamification', color: 'green' }],
     projectSlug: 'auction-product-design',
     coverImage: '/projects/auction-product-design/cover.jpeg',
     externalUrl: 'https://an6122003.github.io/Blueprint-Viewer/',
-    externalLabel: 'View Blueprint',
+    externalLabel: 'View Product Blueprint',
     hasPdf: false,
+    badge: 'Lead Designer & PO',
+    customHoverClass: 'hover:border-[#f97316] hover:shadow-[8px_8px_0_0_#f97316]',
   },
   {
     id: 5,
-    title: 'RBAC System Design',
-    role: 'System Designer · ONEZ Competition',
-    description: 'Defined the permission logic, scoped user roles, and managed the technical implementation of access controls for enterprise back-office applications. Advanced through multiple rounds of the ONEZ RBAC competition.',
-    icon: PixelCheck,
-    tags: [{ label: 'System Design', color: 'green' }, { label: 'Security', color: 'gray' }],
+    title: 'RBAC Pizza Hut Business & Data Analytics Case Study',
+    role: 'Data Analyst & Strategist · Team ONEZ',
+    description: 'Turning raw data into a recovery roadmap for Pizza Hut during the RMIT Business Analytics Champion Season 4. Our team utilized Python and Power BI to uncover that 98.82% of the VIP segment were actually "Rare Buyers" who lapsed following promotion cuts. We countered this with a multi-channel strategy including gamified vouchers, aggregator expansion, and targeted TikTok campaigns to fully recover the customer base by 2024.',
+    icon: BarChart,
+    tags: [{ label: 'Data Analytics', color: 'purple' }, { label: 'Product Strategy', color: 'green' }, { label: 'Python & Power BI', color: 'gray' }, { label: 'Customer Segmentation', color: 'pink' }],
     projectSlug: 'rbac-system-design',
     coverImage: '/projects/rbac-system-design/cover.png',
     hasPdf: true,
-    pdfLabel: 'View Documentation',
+    pdfLabel: 'View Analytics Report',
+    badge: 'Winner',
+    footerText: 'Sponsored by Home Credit and Ipsos',
+    customHoverClass: 'hover:border-[#7c3aed] hover:shadow-[8px_8px_0_0_#7c3aed]',
   },
   {
     id: 7,
-    title: 'UFLL 2023 — Knorr × Energizer 3A',
-    role: 'Competition Entry',
-    description: 'Marketing strategy and brand analysis submission for the Unilever Future Leaders League 2023 competition, focusing on the Knorr and Energizer 3A brand portfolio.',
-    icon: PixelCamera,
-    tags: [{ label: 'Marketing', color: 'pink' }, { label: 'Strategy', color: 'green' }],
+    title: 'Knorr: Bursting the Forgotten Flavor',
+    role: 'Brand Marketing Case · Unilever Future Leader League 2023',
+    description: 'Our team set out to disrupt the stagnant fish sauce category by repositioning Knorr as a "conversation burster" for family meals. We addressed a common modern tension where home-cooked dinners are losing their excitement to phone distractions. The strategy integrated a viral "Eat-in vs. Eat-out" social debate, physical supermarket booths for personalized sauce recipes, and a targeted Zalo conversion system. This campaign was designed to drive 3 million product trials and generate 245 billion VND in incremental sales.',
+    icon: ShoppingCart,
+    tags: [{ label: 'Brand Strategy', color: 'green' }, { label: 'O2O (Online-to-Offline)', color: 'purple' }, { label: 'Consumer Insights', color: 'pink' }, { label: 'Zalo Marketing', color: 'gray' }],
     projectSlug: 'ufll2023',
     coverImage: '/projects/ufll2023/cover.png',
     hasPdf: true,
-    pdfLabel: 'View Deck',
+    pdfLabel: 'View Campaign Breakdown',
+    badge: 'Top 30 Team (out of 2,500+ competitors)',
+    customHoverClass: 'hover:border-[#00a651] hover:shadow-[8px_8px_0_0_#00a651]',
   },
   {
     id: 6,
-    title: 'Machine Learning — COSC2753',
-    role: 'University Project · RMIT',
-    description: 'Collaborative machine learning project covering data preprocessing, model selection, evaluation and technical presentation. Applied various ML algorithms to solve real-world classification/regression problems.',
-    icon: PixelComputer,
-    tags: [{ label: 'Machine Learning', color: 'purple' }, { label: 'Python', color: 'pink' }],
+    title: 'Smart Furniture: Classification & Recommender System',
+    role: 'Machine Learning Engineer · RMIT University',
+    description: 'Our team developed a comprehensive machine learning pipeline to classify 90,000 furniture images into six categories and 17 distinct styles. We implemented and fine-tuned multiple architectures, including ANN, baseline CNN, and ResNet50, utilizing data augmentation and class re-weighting to mitigate significant dataset imbalances. The final solution integrates a K-Nearest Neighbors (KNN) recommender system based on handcrafted visual features like color moments and Gabor filters, all accessible through a real-time web interface for image-based discovery.',
+    icon: Bot,
+    tags: [{ label: 'Computer Vision', color: 'purple' }, { label: 'Deep Learning', color: 'green' }, { label: 'Python & TensorFlow', color: 'pink' }, { label: 'KNN Recommender', color: 'gray' }],
     projectSlug: 'machine-learning',
     coverImage: '/projects/machine-learning/cover.png',
     hasPdf: true,
     pdfLabel: 'View Report',
+    badge: 'RMIT Engineering Project',
+    customHoverClass: 'hover:border-[#6366f1] hover:shadow-[8px_8px_0_0_#6366f1]',
   },
 ];
 
@@ -548,11 +565,11 @@ const ProjectPane = ({ project, isReversed }: { project: Project; isReversed: bo
 
   return (
     <>
-      <div className="w-full bg-white border-2 border-brand-border rounded-xl p-6 md:p-10 transition-all hover:border-black hover:shadow-[8px_8px_0_0_#000]">
-        <div className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12`}>
+      <div id={project.projectSlug} className={`w-full bg-white border-2 border-brand-border rounded-xl p-6 md:p-10 transition-all ${project.customHoverClass || 'hover:border-black hover:shadow-[8px_8px_0_0_#000]'}`}>
+        <div className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-12 lg:items-center`}>
 
           {/* Visual */}
-          <div className="w-full lg:w-5/12 flex flex-col gap-4">
+          <div className="w-full lg:w-1/2 flex flex-col gap-4">
             {project.coverImage ? (
               <div className="w-full rounded-xl overflow-hidden border-2 border-black shadow-[4px_4px_0_0_#000]">
                 <img src={`${import.meta.env.BASE_URL}${project.coverImage.replace(/^\//, '')}`} alt={project.title} className="w-full h-auto object-cover" />
@@ -587,14 +604,30 @@ const ProjectPane = ({ project, isReversed }: { project: Project; isReversed: bo
           </div>
 
           {/* Info */}
-          <div className="w-full lg:w-7/12 flex flex-col justify-center">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-2.5 bg-brand-bg border-2 border-black rounded-lg shadow-[3px_3px_0_0_#000]">
                 <project.icon className="w-7 h-7" />
               </div>
               <h3 className="text-2xl md:text-3xl font-bold">{project.title}</h3>
             </div>
-            <p className="text-sm font-bold text-brand-subtext mb-4 uppercase tracking-wider">{project.role}</p>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <p className="text-sm font-bold text-brand-subtext uppercase tracking-wider">{project.role}</p>
+              {project.badge && (
+                <span className="bg-black text-[#fdfaf5] border-2 border-black shadow-[2px_2px_0_0_#EAEAEA] px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-sm">
+                  ★ {project.badge}
+                </span>
+              )}
+              {project.isLive && (
+                <span className="flex items-center gap-2 bg-[#ecfdf5] text-[#047857] border-2 border-[#10b981] shadow-[2px_2px_0_0_#10b981] px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#059669]"></span>
+                  </span>
+                  Live Systems: Active
+                </span>
+              )}
+            </div>
             <p className="text-brand-text text-base leading-relaxed mb-6">{project.description}</p>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -626,6 +659,12 @@ const ProjectPane = ({ project, isReversed }: { project: Project; isReversed: bo
                 </a>
               )}
             </div>
+
+            {project.footerText && (
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-6 border-t-2 border-gray-100 pt-4">
+                {project.footerText}
+              </p>
+            )}
           </div>
         </div>
       </div>

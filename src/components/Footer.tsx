@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from './ui';
-import { Github, Linkedin, Mail, Youtube } from 'lucide-react';
-import { PixelComputer } from './PixelIcons';
+import { Github, Linkedin, Mail, Youtube, Facebook } from 'lucide-react';
+import { PixelComputer, TikTokIcon } from './PixelIcons';
 
 export function Footer() {
   return (
@@ -28,6 +28,12 @@ export function Footer() {
             </a>
             <a href="https://www.youtube.com/@anndaynee" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline underline-offset-4 font-semibold text-sm">
               <Youtube className="w-5 h-5" /> YouTube
+            </a>
+            <a href="https://www.facebook.com/anmamxanhbaby/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline underline-offset-4 font-semibold text-sm">
+              <Facebook className="w-5 h-5" /> Facebook
+            </a>
+            <a href="https://www.tiktok.com/@anndaynee" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline underline-offset-4 font-semibold text-sm">
+              <TikTokIcon className="w-5 h-5" /> TikTok
             </a>
           </div>
         </div>

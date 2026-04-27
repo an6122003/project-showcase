@@ -38,3 +38,18 @@ export const PixelCamera = ({ className = "" }: { className?: string }) => (
     <path d="M8 8h12v2H8V8zm-2 2h2v10H6V10zm14 0h-2v10h2v-10zm0 2h4v-2h-4v2zm4-2h2v6h-2v-6zm0 6h-4v2h4v-2zM8 20h12v2H8v-2zm4-8h4v4h-4v-4z" />
   </svg>
 );
+
+export const TikTokIcon = ({ className = "" }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a3 3 0 0 1-3-3v8a4 4 0 0 1-2-3.46" />
+  </svg>
+);

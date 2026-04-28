@@ -225,7 +225,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-in-out z-0 ${bgState === 'why' ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`hidden lg:block absolute inset-0 pointer-events-none transition-opacity duration-700 ease-in-out z-0 ${bgState === 'why' ? 'opacity-100' : 'opacity-0'}`}>
         {/* Why: Wireframes SVG */}
         <div className="absolute inset-0 flex items-center justify-center">
           <WireframeSVG />
@@ -233,7 +233,7 @@ export function HeroSection() {
       </div>
 
       <Container>
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 lg:gap-20">
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 lg:gap-20">
           <div className="flex flex-col items-center gap-4 relative">
             <div className="w-60 h-60 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0">
               <img src={`${import.meta.env.BASE_URL}avatar.png`} alt="An Nguyen Quoc" className="w-full h-full object-cover rounded-[2rem] border-4 border-black shadow-[6px_6px_0_0_#000] rotate-3 hover:rotate-0 transition-transform duration-300 relative z-10 bg-white" />

@@ -44,7 +44,7 @@ export function Navbar() {
               <a href="#social" className="hover:text-black hover:underline underline-offset-4 decoration-2">Social</a>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center justify-end gap-2 md:gap-3">
               <a href="https://www.linkedin.com/in/an-nguyen-quoc/" target="_blank" rel="noopener noreferrer" className="p-2 border-2 border-brand-border rounded hover:border-black transition-colors text-brand-subtext hover:text-black">
                 <Linkedin size={18} />
               </a>

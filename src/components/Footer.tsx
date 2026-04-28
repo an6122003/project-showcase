@@ -16,7 +16,7 @@ export function Footer() {
             <p className="text-brand-subtext font-medium">Let's connect and build something great.</p>
           </div>
           
-          <div className="flex items-center gap-6 text-brand-text">
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-4 md:gap-6 text-brand-text">
             <a href="mailto:an6122003@gmail.com" className="flex items-center gap-2 hover:underline underline-offset-4 font-semibold text-sm">
               <Mail className="w-5 h-5" /> Email
             </a>

@@ -10,7 +10,7 @@ import { fetchPdf } from '../utils/fetchPdf';
 // Reuse the same worker setup
 pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min.mjs`;
 
-const cvUrl = '/projects/cv/CV_PM_1Page.bin';
+const cvUrl = '/projects/cv/CV_PM_1Page_v2.bin';
 
 const codeSnippet = `
 function initializeMultiAgentPipeline(config: PipelineConfig) {

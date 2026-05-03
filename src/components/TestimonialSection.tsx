@@ -13,7 +13,7 @@ const principles = [
   },
   {
     category: "The Product Perspective",
-    title: "The \"Why\" Before the \"What\"",
+    title: "The \"Why\" Before the \"How\"",
     body: "Every feature should solve a actual problem. I focus on ruthlessly prioritizing the MVP to find product-market fit early. If we cannot measure the impact of a feature, we probably should not be building it yet.",
     icon: Compass,
     iconBg: "bg-purple-100",
@@ -42,7 +42,7 @@ export function TestimonialSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {principles.map((p, idx) => (
-            <div 
+            <div
               key={idx}
               className="bg-white p-8 border-2 border-black rounded-xl shadow-[6px_6px_0_0_#000] flex flex-col transition-all hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#000]"
             >
@@ -52,7 +52,7 @@ export function TestimonialSection() {
                 </div>
                 <div className="text-sm font-bold text-brand-subtext uppercase tracking-wider">{p.category}</div>
               </div>
-              
+
               <h3 className="text-2xl font-bold mb-4">{p.title}</h3>
               <p className="text-lg text-brand-text leading-relaxed font-medium flex-1">
                 {p.body}

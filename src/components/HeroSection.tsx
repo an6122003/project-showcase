@@ -273,7 +273,7 @@ export function HeroSection() {
               Most engineers only care about how a system works. I am obsessed with why it matters to the user.
             </p>
             <p className="text-base text-brand-subtext mb-8 leading-relaxed">
-              For the past two years, I have operated as a Software Engineer with a Product Manager's mindset, translating deep technical complexity into products that actually scale. I design and build systems ranging from autonomous AI pipelines to machine learning models. Beyond engineering, I solve high stakes business and marketing cases for global brands like Pizza Hut and Unilever. This is where technical precision meets business impact.
+              I solve complex customer pain points by building products that actually scale. Over the past two years as a Software Engineer, I have translated deep technical complexity into seamless user experiences. I architect autonomous AI pipelines and machine learning models with a relentless focus on the end user. Beyond the code, I drive high stakes business and marketing strategies for global brands like Pizza Hut and Unilever. I bridge the gap between engineering and revenue to ensure every technical feature delivers a massive business impact.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto mb-8">

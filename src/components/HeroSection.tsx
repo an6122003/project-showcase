@@ -10,7 +10,7 @@ import { fetchPdf } from '../utils/fetchPdf';
 // Reuse the same worker setup
 pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min.mjs`;
 
-const cvUrl = '/projects/cv/CV_PM_1Page_v2.bin';
+const cvUrl = '/projects/cv/CV_PM_1Page_v3.bin';
 
 const codeSnippet = `
 function initializeMultiAgentPipeline(config: PipelineConfig) {
@@ -124,7 +124,7 @@ function useMagnetic() {
   return { ref, handleMouseMove, handleMouseLeave };
 }
 
-export function HeroSection() {
+export function HeroSection({ onShowProductWork }: { onShowProductWork: () => void }) {
   const [bgState, setBgState] = useState<'none' | 'how' | 'why'>('none');
   const magnetic = useMagnetic();
 
@@ -206,7 +206,7 @@ export function HeroSection() {
     if (blobUrlRef.current) {
       const a = document.createElement('a');
       a.href = blobUrlRef.current;
-      a.download = 'CV_PM_1Page.pdf';
+      a.download = 'CV_PM_Nguyen_Quoc_An.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -272,8 +272,8 @@ export function HeroSection() {
             <p className="text-lg md:text-xl font-medium text-brand-text mb-4 leading-relaxed">
               Most engineers only care about how a system works. I am obsessed with why it matters to the user.
             </p>
-            <p className="text-base text-brand-subtext mb-8 leading-relaxed">
-              I solve complex customer pain points by building products that actually scale. Over the past two years as a Software Engineer, I have translated deep technical complexity into seamless user experiences. I architect autonomous AI pipelines and machine learning models with a relentless focus on the end user. Beyond the code, I drive high stakes business and marketing strategies for global brands like Pizza Hut and Unilever. I bridge the gap between engineering and revenue to ensure every technical feature delivers a massive business impact.
+            <p className="text-base text-brand-subtext mb-8 leading-relaxed max-w-xl">
+              I turn complex customer problems into clear product decisions, then work close to the technology to ship them. My portfolio spans fintech journeys, AI systems, growth strategy, and user-focused product design.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto mb-8">
@@ -284,13 +284,14 @@ export function HeroSection() {
 
               <a
                 href="#projects"
+                onClick={onShowProductWork}
                 ref={magnetic.ref}
                 onMouseMove={magnetic.handleMouseMove}
                 onMouseLeave={magnetic.handleMouseLeave}
                 className="font-bold text-sm underline underline-offset-4 decoration-2 decoration-brand-subtext hover:decoration-black hover:text-black transition-colors duration-200 ease-out inline-block px-4 py-2"
                 style={{ transition: 'transform 0.1s ease-out' }}
               >
-                Explore my work ↓
+                Explore Product shortlist ↓
               </a>
             </div>
 

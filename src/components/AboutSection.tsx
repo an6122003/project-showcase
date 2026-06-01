@@ -1,9 +1,30 @@
 import React from 'react';
 import { Container } from './ui';
-import { Briefcase, Code, Compass, GraduationCap, Server, Linkedin } from 'lucide-react';
+import { Briefcase, Code, Compass, Filter, GraduationCap, Server, Linkedin } from 'lucide-react';
 import { PixelComputer } from './PixelIcons';
+import { PortfolioFocus, portfolioFocusOptions } from './portfolioFocus';
 
-export function AboutSection() {
+const focusLabel = (focus: PortfolioFocus) => portfolioFocusOptions.find(option => option.id === focus)!.label;
+
+const FocusTags = ({ focuses }: { focuses: PortfolioFocus[] }) => (
+  <div className="flex flex-wrap gap-1.5 mb-3">
+    {focuses.map(focus => (
+      <span key={focus} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-purple-100 text-purple-800">
+        {focusLabel(focus)}
+      </span>
+    ))}
+  </div>
+);
+
+export function AboutSection({
+  activeFocus,
+  onFocusChange,
+}: {
+  activeFocus: PortfolioFocus;
+  onFocusChange: (focus: PortfolioFocus) => void;
+}) {
+  const hasExtracurricular = ['product', 'business'].includes(activeFocus);
+
   return (
     <section className="py-24 bg-[#fdfaf5]" id="experience">
       <Container>
@@ -59,14 +80,43 @@ export function AboutSection() {
 
           {/* Right Column: Timeline */}
           <div className="w-full lg:w-7/12 flex flex-col gap-10">
+            <div className="bg-white border-2 border-black rounded-xl p-5 md:p-6 shadow-[4px_4px_0_0_#000]">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-subtext mb-3">
+                <Filter className="w-4 h-4 text-black" />
+                Relevant experience route
+              </div>
+              <p className="text-sm text-brand-subtext leading-relaxed mb-4">
+                Choose the perspective most relevant to your review.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {portfolioFocusOptions.map(option => {
+                  const isActive = option.id === activeFocus;
+                  return (
+                    <button
+                      type="button"
+                      key={option.id}
+                      onClick={() => onFocusChange(option.id)}
+                      aria-pressed={isActive}
+                      className={`text-left p-4 border-2 rounded-xl transition-all ${
+                        isActive
+                          ? 'bg-purple-100 border-black shadow-[3px_3px_0_0_#000]'
+                          : 'bg-white border-brand-border hover:border-black hover:shadow-[3px_3px_0_0_#000]'
+                      }`}
+                    >
+                      <span className="block font-bold">{option.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
             
             {/* Work Experience */}
             <div>
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                <Briefcase className="w-6 h-6" /> Work Experience
+                <Briefcase className="w-6 h-6" /> {focusLabel(activeFocus)} Experience
               </h3>
               <div className="relative border-l-4 border-black pl-8 ml-4 space-y-8">
-                <div className="relative">
+                {['product', 'engineering'].includes(activeFocus) && <div className="relative">
                   <div className="absolute w-5 h-5 bg-black rounded-full -left-[42px] top-1 border-4 border-[#fdfaf5]"></div>
                   <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                     <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
@@ -74,13 +124,14 @@ export function AboutSection() {
                     </div>
                     <h4 className="text-xl font-bold text-black mb-1">Back-end & Platform Engineer</h4>
                     <p className="text-brand-subtext font-bold mb-3">HCLTech x ANZx (ANZ Plus)</p>
+                    <FocusTags focuses={['product', 'engineering']} />
                     <p className="text-sm text-gray-700 leading-relaxed md:line-clamp-4">
                       Led the end-to-end lifecycle of a Multi-Agent Analytics Chatbot automating SQL generation and chart visualization. Delivered secure Joint-Account workflows and optimized Google Cloud usage, eliminating manual financial data processing.
                     </p>
                   </div>
-                </div>
+                </div>}
 
-                <div className="relative">
+                {['product', 'business'].includes(activeFocus) && <div className="relative">
                   <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
                   <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                     <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
@@ -88,13 +139,14 @@ export function AboutSection() {
                     </div>
                     <h4 className="text-xl font-bold text-black mb-1">IT Intern Co-op / Management</h4>
                     <p className="text-brand-subtext font-bold mb-3">Procter & Gamble Vietnam</p>
+                    <FocusTags focuses={['product', 'business']} />
                     <p className="text-sm text-gray-700 leading-relaxed">
                       Led global SU/Pallet tracking initiative for Grooming BU, aligning up to 20 cross-functional stakeholders.
                     </p>
                   </div>
-                </div>
+                </div>}
 
-                <div className="relative">
+                {activeFocus === 'business' && <div className="relative">
                   <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
                   <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                     <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
@@ -102,16 +154,17 @@ export function AboutSection() {
                     </div>
                     <h4 className="text-xl font-bold text-black mb-1">Marketing Intern</h4>
                     <p className="text-brand-subtext font-bold mb-3">Vietnam Australia International School</p>
+                    <FocusTags focuses={['business']} />
                     <p className="text-sm text-gray-700 leading-relaxed">
                       Managed marketing copywriting and content production. Founded and grew social communities to 30,000+ followers, assisting the PR Manager in media creation and event organization to promote School's values.
                     </p>
                   </div>
-                </div>
+                </div>}
               </div>
             </div>
 
             {/* Extracurricular */}
-            <div>
+            {hasExtracurricular && <div>
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <Compass className="w-6 h-6" /> Extracurricular
               </h3>
@@ -124,13 +177,14 @@ export function AboutSection() {
                     </div>
                     <h4 className="text-xl font-bold text-black mb-1">Project Leader</h4>
                     <p className="text-brand-subtext font-bold mb-3">Intelligent Investment Competition</p>
+                    <FocusTags focuses={['product', 'business']} />
                     <p className="text-sm text-gray-700 leading-relaxed">
                       Directed a 6-month action plan for a nationwide virtual stock trading competition with 600+ participants. Managed 4 cross-functional teams (38 members) spanning Marketing, Sponsorship, and Programming. Secured complex stakeholder partnerships and major funding.
                     </p>
                   </div>
                 </div>
 
-                <div className="relative">
+                {activeFocus === 'business' && <div className="relative">
                   <div className="absolute w-5 h-5 bg-white border-4 border-black rounded-full -left-[42px] top-1"></div>
                   <div className="bg-white p-6 border-2 border-black rounded-xl shadow-[4px_4px_0_0_#000] transition-all hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[6px_6px_0_0_#000]">
                     <div className="flex items-center gap-2 text-brand-subtext font-bold text-xs uppercase tracking-wide mb-2">
@@ -138,13 +192,14 @@ export function AboutSection() {
                     </div>
                     <h4 className="text-xl font-bold text-black mb-1">External Vice President</h4>
                     <p className="text-brand-subtext font-bold mb-3">RMIT Vietnam Finance Club</p>
+                    <FocusTags focuses={['business']} />
                     <p className="text-sm text-gray-700 leading-relaxed">
                       Operated as an Executive Board member, managing 140+ members across 4 departments. Efficiently supervised External Relations and Marketing teams, growing social communities to 29k+ followers and driving successful medium-scale events through cross-club collaborations.
                     </p>
                   </div>
-                </div>
+                </div>}
               </div>
-            </div>
+            </div>}
 
             {/* Education */}
             <div>

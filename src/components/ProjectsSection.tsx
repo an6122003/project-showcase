@@ -6,6 +6,7 @@ import { Container, Tag, Modal } from './ui';
 import { PixelComputer, PixelHammer, PixelCheck, PixelGlobe, PixelCamera } from './PixelIcons';
 import { FileText, ChevronLeft, ChevronRight, Download, ExternalLink, Loader, BarChart, ShoppingCart, Bot, MonitorSmartphone, ShieldCheck, Gavel, Sparkles } from 'lucide-react';
 import { fetchPdf } from '../utils/fetchPdf';
+import { PortfolioFocus, portfolioFocusOptions } from './portfolioFocus';
 
 // Configure pdf.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `${import.meta.env.BASE_URL}pdf.worker.min.mjs`;
@@ -452,6 +453,7 @@ interface Project {
   isLive?: boolean;
   footerText?: string;
   customHoverClass?: string;
+  focuses: PortfolioFocus[];
 }
 
 const projects: Project[] = [
@@ -459,7 +461,7 @@ const projects: Project[] = [
     id: 3,
     title: 'RetroLab: AI-Powered Tech News Platform',
     role: 'Founder & Technical Architect · Digital Media Platform',
-    description: 'RetroLab is an automated, AI-driven tech news ecosystem designed to disrupt the Vietnamese digital media market. I architected a headless, multi-agent pipeline that automates the entire editorial lifecycle—from discovery and deduplication to cultural adaptation and SEO optimization—achieving a 99% automation rate and a 2-minute time-to-publish. By implementing a cost-aware multi-LLM routing strategy (Gemini, Claude, Ollama) and a FinOps dashboard, the platform scales to 50+ articles daily while maintaining a near-zero marginal cost of $0.001 per article. This project demonstrates a full-cycle transition from product vision to a high-volume, low-overhead live deployment.',
+    description: 'Built an AI-driven Vietnamese tech news platform from product vision to live deployment. A multi-agent editorial pipeline reaches 99% automation, publishes in two minutes, and scales to 50+ articles daily at $0.001 per article.',
     icon: Sparkles,
     tags: [{ label: 'AI Automation', color: 'purple' }, { label: 'FinOps & Unit Economics', color: 'green' }, { label: 'Next.js & LLMs', color: 'pink' }, { label: 'Product Architecture', color: 'gray' }],
     projectSlug: 'retrolab',
@@ -468,12 +470,28 @@ const projects: Project[] = [
     externalLabel: 'View Portfolio Site',
     hasPdf: false,
     customHoverClass: 'hover:border-[#38bdf8] hover:shadow-[8px_8px_0_0_#38bdf8]',
+    focuses: ['product', 'engineering'],
+  },
+  {
+    id: 8,
+    title: 'SPX Express: AI-Native Procurement-to-Pay Platform',
+    role: 'Business Product Management (AI Solutions) · SPX Express Case Study',
+    description: 'Designed an AI-native Procurement-to-Pay platform for SPX Express to replace fragmented manual workflows from request intake through payment. The solution normalizes vendor documents, supports human-in-the-loop approvals, and improves cost visibility across operational teams.',
+    icon: Sparkles,
+    tags: [{ label: 'AI Product Strategy', color: 'purple' }, { label: 'Procurement-to-Pay', color: 'green' }, { label: 'Workflow Automation', color: 'pink' }, { label: 'Product Mockups', color: 'gray' }],
+    projectSlug: 'spx-case-study',
+    coverImage: '/projects/spx-case-study/cover.png',
+    hasPdf: true,
+    pdfLabel: 'View Product Solution',
+    badge: 'SPX Express Case Study',
+    customHoverClass: 'hover:border-[#ee4d2d] hover:shadow-[8px_8px_0_0_#ee4d2d]',
+    focuses: ['product', 'business'],
   },
   {
     id: 1,
     title: 'ZaloPay: Compliant PIN Expiration Management',
     role: 'Associate Product Owner · User Platform Case Study',
-    description: 'Designing a strategy to manage ZaloPay’s mandatory 12-month PIN expiration without breaking critical payment journeys. I proposed an "Interrupt & Resume" framework that preserves session states, allowing users to complete security resets mid-payment without losing their progress. The implementation features a tiered notification system that escalates urgency from T-30 to T-0 and utilizes a canary rollout to protect high-frequency transaction volume. This approach ensures full compliance with Circular 50/2024/TT-NHNN while maintaining a targeted 99% completion rate for interrupted payments.',
+    description: 'Designed a compliant PIN-expiration journey without breaking critical payments. The solution preserves session state through an "Interrupt & Resume" flow, adds tiered notifications, and uses a canary rollout to target a 99% completion rate for interrupted transactions.',
     icon: ShieldCheck,
     tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'Fintech Compliance', color: 'green' }, { label: 'UX Optimization', color: 'pink' }, { label: 'Risk Management', color: 'gray' }],
     projectSlug: 'zalopay-case-study',
@@ -482,12 +500,13 @@ const projects: Project[] = [
     pdfLabel: 'View Product Solution',
     badge: 'ZaloPay Case Study',
     customHoverClass: 'hover:border-[#0f9a8d] hover:shadow-[8px_8px_0_0_#0f9a8d]',
+    focuses: ['product', 'business'],
   },
   {
     id: 2,
     title: 'Zalo: Multi-Device Ecosystem for Business',
     role: 'Product Management Case Study · Zalo Product Management Trainee 2023',
-    description: 'Designing a strategic roadmap to scale Zalo\'s professional ecosystem by resolving the critical "single-device" limitation for business users. We proposed a tiered simultaneous login framework enabling Zalo Official Accounts and Business tiers to operate across up to four devices while ensuring data integrity. To mitigate security risks, the solution features a centralized management dashboard and a temporary cloud synchronization system to prevent message loss during device transitions. This project targets a 30% increase in premium conversions by aligning Zalo\'s technical architecture with the operational needs of modern SMEs.',
+    description: 'Designed a roadmap for Zalo business users constrained by single-device access. The proposal enables secure multi-device usage, prevents message loss, and targets a 30% increase in premium conversions for SMEs.',
     icon: MonitorSmartphone,
     tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'Feature Design', color: 'green' }, { label: 'Business Growth', color: 'pink' }, { label: 'UX/UI Mockups', color: 'gray' }],
     projectSlug: 'zalo-pmt-2023',
@@ -495,12 +514,13 @@ const projects: Project[] = [
     hasPdf: true,
     pdfLabel: 'View Product Roadmap',
     customHoverClass: 'hover:border-[#0068ff] hover:shadow-[8px_8px_0_0_#0068ff]',
+    focuses: ['product', 'business'],
   },
   {
     id: 4,
     title: 'Auction Game Product Design',
     role: 'Product Owner & Lead UI/UX Designer',
-    description: 'Defining the Product Design for a live e-commerce auction feature integrated with a gamified "earn-turns" mechanic. I mapped end-to-end user journeys and managed feature scoping by negotiating design goals against engineering constraints. The final solution includes a real-time bidding interface and task-based rewards designed to drive user engagement and platform retention.',
+    description: 'Defined an e-commerce auction feature with a gamified earn-turns mechanic. I mapped the end-to-end journey, scoped the MVP against engineering constraints, and designed real-time bidding and task-based rewards to improve retention.',
     icon: Gavel,
     tags: [{ label: 'Product Strategy', color: 'purple' }, { label: 'MVP Scoping', color: 'gray' }, { label: 'UI/UX Design', color: 'pink' }, { label: 'Gamification', color: 'green' }],
     projectSlug: 'auction-product-design',
@@ -510,12 +530,13 @@ const projects: Project[] = [
     hasPdf: false,
     badge: 'Lead Designer & PO',
     customHoverClass: 'hover:border-[#f97316] hover:shadow-[8px_8px_0_0_#f97316]',
+    focuses: ['product', 'engineering'],
   },
   {
     id: 5,
     title: 'RBAC Pizza Hut Business & Data Analytics Case Study',
     role: 'Data Analyst & Strategist · Team ONEZ',
-    description: 'Turning raw data into a recovery roadmap for Pizza Hut during the RMIT Business Analytics Champion Season 4. Our team utilized Python and Power BI to uncover that 98.82% of the VIP segment were actually "Rare Buyers" who lapsed following promotion cuts. We countered this with a multi-channel strategy including gamified vouchers, aggregator expansion, and targeted TikTok campaigns to fully recover the customer base by 2024.',
+    description: 'Turned raw customer data into a recovery roadmap for Pizza Hut. Using Python and Power BI, our team found that 98.82% of the VIP segment were lapsed rare buyers and designed a multi-channel strategy to win them back.',
     icon: BarChart,
     tags: [{ label: 'Data Analytics', color: 'purple' }, { label: 'Product Strategy', color: 'green' }, { label: 'Python & Power BI', color: 'gray' }, { label: 'Customer Segmentation', color: 'pink' }],
     projectSlug: 'rbac-system-design',
@@ -525,12 +546,13 @@ const projects: Project[] = [
     badge: 'Winner',
     footerText: 'Sponsored by Home Credit and Ipsos',
     customHoverClass: 'hover:border-[#7c3aed] hover:shadow-[8px_8px_0_0_#7c3aed]',
+    focuses: ['business'],
   },
   {
     id: 7,
     title: 'Knorr: Bursting the Forgotten Flavor',
     role: 'Brand Marketing Case · Unilever Future Leader League 2023',
-    description: 'Our team set out to disrupt the stagnant fish sauce category by repositioning Knorr as a "conversation burster" for family meals. We addressed a common modern tension where home-cooked dinners are losing their excitement to phone distractions. The strategy integrated a viral "Eat-in vs. Eat-out" social debate, physical supermarket booths for personalized sauce recipes, and a targeted Zalo conversion system. This campaign was designed to drive 3 million product trials and generate 245 billion VND in incremental sales.',
+    description: 'Repositioned Knorr as a conversation starter for family meals in a stagnant category. The integrated social, retail, and Zalo strategy was designed to drive three million product trials and 245 billion VND in incremental sales.',
     icon: ShoppingCart,
     tags: [{ label: 'Brand Strategy', color: 'green' }, { label: 'O2O (Online-to-Offline)', color: 'purple' }, { label: 'Consumer Insights', color: 'pink' }, { label: 'Zalo Marketing', color: 'gray' }],
     projectSlug: 'ufll2023',
@@ -539,12 +561,13 @@ const projects: Project[] = [
     pdfLabel: 'View Campaign Breakdown',
     badge: 'Top 30 Team (out of 2,500+ competitors)',
     customHoverClass: 'hover:border-[#00a651] hover:shadow-[8px_8px_0_0_#00a651]',
+    focuses: ['business'],
   },
   {
     id: 6,
     title: 'Smart Furniture: Classification & Recommender System',
     role: 'Machine Learning Engineer · RMIT University',
-    description: 'Our team developed a comprehensive machine learning pipeline to classify 90,000 furniture images into six categories and 17 distinct styles. We implemented and fine-tuned multiple architectures, including ANN, baseline CNN, and ResNet50, utilizing data augmentation and class re-weighting to mitigate significant dataset imbalances. The final solution integrates a K-Nearest Neighbors (KNN) recommender system based on handcrafted visual features like color moments and Gabor filters, all accessible through a real-time web interface for image-based discovery.',
+    description: 'Built a machine-learning pipeline that classifies 90,000 furniture images across six categories and 17 styles. The final product combines a tuned ResNet50 model with a KNN recommendation experience for real-time image-based discovery.',
     icon: Bot,
     tags: [{ label: 'Computer Vision', color: 'purple' }, { label: 'Deep Learning', color: 'green' }, { label: 'Python & TensorFlow', color: 'pink' }, { label: 'KNN Recommender', color: 'gray' }],
     projectSlug: 'machine-learning',
@@ -553,6 +576,7 @@ const projects: Project[] = [
     pdfLabel: 'View Report',
     badge: 'RMIT Engineering Project',
     customHoverClass: 'hover:border-[#6366f1] hover:shadow-[8px_8px_0_0_#6366f1]',
+    focuses: ['engineering'],
   },
 ];
 
@@ -683,16 +707,56 @@ const ProjectPane = ({ project, isReversed }: { project: Project; isReversed: bo
 
 // ─── ProjectsSection ─────────────────────────────────────────────
 
-export function ProjectsSection() {
+export function ProjectsSection({
+  activeFocus,
+  onFocusChange,
+}: {
+  activeFocus: PortfolioFocus;
+  onFocusChange: (focus: PortfolioFocus) => void;
+}) {
+  const filteredProjects = projects.filter(project => project.focuses.includes(activeFocus));
+  const selectedFocus = portfolioFocusOptions.find(option => option.id === activeFocus)!;
+
   return (
     <section className="py-24 bg-brand-bg border-y-2 border-brand-border" id="projects">
       <Container>
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Work & Case Studies</h2>
-          <p className="text-brand-subtext max-w-2xl text-lg">A deep dive into my work bridging technical complexity with seamless user experiences.</p>
+        <div className="mb-10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-7">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-purple-700 mb-3">Curated for faster review</p>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">Selected Work & Case Studies</h2>
+              <p className="text-brand-subtext max-w-2xl text-lg">
+                {selectedFocus.description} Showing {filteredProjects.length} relevant {filteredProjects.length === 1 ? 'case study' : 'case studies'}.
+              </p>
+            </div>
+            <a href="#experience" className="font-bold text-sm underline underline-offset-4 decoration-2 hover:text-purple-700">
+              Back to experience filter ↑
+            </a>
+          </div>
+
+          <div className="flex flex-wrap gap-2" aria-label="Filter case studies by function">
+            {portfolioFocusOptions.map(option => {
+              const isActive = option.id === activeFocus;
+              return (
+                <button
+                  type="button"
+                  key={option.id}
+                  onClick={() => onFocusChange(option.id)}
+                  aria-pressed={isActive}
+                  className={`px-4 py-2 border-2 border-black rounded-lg text-sm font-bold transition-all ${
+                    isActive
+                      ? 'bg-black text-white shadow-[3px_3px_0_0_#c7b7ff]'
+                      : 'bg-white text-black hover:bg-purple-50 hover:shadow-[3px_3px_0_0_#000]'
+                  }`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
         <div className="flex flex-col gap-10">
-          {projects.map((project, idx) => (
+          {filteredProjects.map((project, idx) => (
             <ProjectPane key={project.id} project={project} isReversed={idx % 2 === 1} />
           ))}
         </div>

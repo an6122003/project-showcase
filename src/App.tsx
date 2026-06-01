@@ -16,9 +16,13 @@ import { ArticlesSection } from './components/ArticlesSection';
 import { ContentSection } from './components/ContentSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { PresentationSlide } from './components/PresentationSlide';
+import { PortfolioFocus } from './components/portfolioFocus';
 
 export default function App() {
   const [showTopBtn, setShowTopBtn] = useState(false);
+  const [isSlideView, setIsSlideView] = useState(window.location.hash === '#slide');
+  const [activeFocus, setActiveFocus] = useState<PortfolioFocus>('product');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +33,16 @@ export default function App() {
       }
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const handleHashChange = () => {
+      setIsSlideView(window.location.hash === '#slide');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -39,14 +52,25 @@ export default function App() {
     });
   };
 
+  if (isSlideView) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+        {/* Scale container to fit most screens but keep 16:9 ratio of the 1280x720 slide */}
+        <div style={{ transform: 'scale(min(1, max(0.5, calc(min(100vw/1280, 100vh/720)))))', transformOrigin: 'center center' }}>
+          <PresentationSlide />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen font-sans bg-brand-bg text-brand-text relative">
       <Navbar />
-      <HeroSection />
+      <HeroSection onShowProductWork={() => setActiveFocus('product')} />
       <TechStackSection />
-      <AboutSection />
+      <AboutSection activeFocus={activeFocus} onFocusChange={setActiveFocus} />
+      <ProjectsSection activeFocus={activeFocus} onFocusChange={setActiveFocus} />
       <AwardsSection />
-      <ProjectsSection />
       <TestimonialSection />
       <ArticlesSection />
       <ContentSection />
@@ -64,4 +88,3 @@ export default function App() {
     </div>
   );
 }
-

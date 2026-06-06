@@ -458,6 +458,22 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: 9,
+    title: 'Antibot: Agentic Discord Community Manager',
+    role: 'AI Product Builder · Discord Community Automation · Pre-launch',
+    description: 'Building an agentic Discord community manager that talks first, remembers member context, and makes servers feel alive. The experience turns passive chat spaces into proactive communities through memory-driven prompts, contextual replies, and always-on engagement.',
+    icon: Bot,
+    tags: [{ label: 'Agentic AI', color: 'purple' }, { label: 'Community Product', color: 'green' }, { label: 'Discord Automation', color: 'pink' }, { label: 'Pre-launch', color: 'gray' }],
+    projectSlug: 'antibot',
+    coverImage: '/projects/antibot/cover.png',
+    externalUrl: 'https://techieslab-app.github.io/antibot/',
+    externalLabel: 'View Landing Page',
+    hasPdf: false,
+    badge: 'In Development',
+    customHoverClass: 'hover:border-[#f08062] hover:shadow-[8px_8px_0_0_#f08062]',
+    focuses: ['product', 'engineering'],
+  },
+  {
     id: 3,
     title: 'RetroLab: AI-Powered Tech News Platform',
     role: 'Founder & Technical Architect · Digital Media Platform',

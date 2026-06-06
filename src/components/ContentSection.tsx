@@ -108,14 +108,14 @@ const YouTubeEmbed = () => (
   <div className="h-full lg:translate-y-8 transition-all duration-500 hover:-translate-y-2 hover:rotate-1 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)] rounded-xl">
     <SocialWrapper platform="YouTube" icon={Youtube} iconColor="text-red-600" headerBg="bg-red-50">
       <iframe
-        src="https://www.youtube.com/embed/videoseries?list=UUp516-9p-tw8HPqyY68i3Ow"
+        src="https://www.youtube.com/embed/253pLcwnCeQ"
         width="100%"
         height="100%"
         className="absolute inset-0 w-full h-full"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
-        title="YouTube Channel"
+        title="YouTube Short"
       />
     </SocialWrapper>
   </div>

@@ -18,11 +18,21 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { PresentationSlide } from './components/PresentationSlide';
 import { PortfolioFocus } from './components/portfolioFocus';
+import { KolLandingPage } from './components/KolLandingPage';
+import { KolMarkdownPage } from './components/KolMarkdownPage';
 
 export default function App() {
+  const redirectedPath = new URLSearchParams(window.location.search).get('redirect');
+  if (redirectedPath) {
+    window.history.replaceState(null, '', redirectedPath);
+  }
+
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [isSlideView, setIsSlideView] = useState(window.location.hash === '#slide');
   const [activeFocus, setActiveFocus] = useState<PortfolioFocus>('product');
+  const normalizedPath = window.location.pathname.replace(/\/+$/, '');
+  const isKolView = normalizedPath === '/kol';
+  const isRemotionEpisodeView = normalizedPath === '/kol/series/remotion';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +71,14 @@ export default function App() {
         </div>
       </div>
     );
+  }
+
+  if (isKolView) {
+    return <KolLandingPage />;
+  }
+
+  if (isRemotionEpisodeView) {
+    return <KolMarkdownPage markdownPath="/kol/series/remotion.md" />;
   }
 
   return (

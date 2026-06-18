@@ -102,12 +102,33 @@ const collaborationPackages = [
   },
 ];
 
-const resourceLinks = [
+const resourceLinks: Array<{
+  title: string;
+  description: string;
+  href: string;
+  external: boolean;
+  image?: string;
+  icon?: React.ComponentType<{ className?: string }>;
+}> = [
   {
     title: 'Antibot',
     description: 'Agentic Discord community manager, pre-launch',
-    href: 'https://techieslab-app.github.io/antibot-landing-page/',
-    image: '/projects/antibot/cover.png',
+    href: 'https://antibot.techieslab.app/',
+    image: '/kol/featured-links/antibot/cover.svg',
+    external: true,
+  },
+  {
+    title: 'Techies Lab',
+    description: 'Khám phá các sản phẩm và thử nghiệm công nghệ từ Techies Lab.',
+    href: 'https://techieslab.app/',
+    image: '/kol/featured-links/techies-lab/cover.png',
+    external: true,
+  },
+  {
+    title: 'Tham gia cộng đồng công nghệ Hey Techiee',
+    description: 'Kết nối, chia sẻ và trò chuyện cùng cộng đồng yêu công nghệ trên Discord.',
+    href: 'https://discord.gg/EbZRxkYu5U',
+    image: '/kol/featured-links/hey-techiee/cover.webp',
     external: true,
   },
 ];
@@ -120,6 +141,13 @@ const seriesDocuments = [
         title: 'Ep1: Remotion',
         description: 'Tạo video bằng React, phù hợp để demo automation và creative coding.',
         href: '/kol/series/remotion',
+        cover: '',
+      },
+      {
+        title: 'Ep2: Fotocaja',
+        description: 'App chỉnh sửa ảnh 2D miễn phí, không cần đăng nhập, không thu thập dữ liệu cá nhân.',
+        href: '/kol/series/fotocaja',
+        cover: '/kol/series/fotocaja/cover.png',
       },
     ],
   },
@@ -208,9 +236,15 @@ function StorefrontTab() {
                 rel={link.external ? 'noopener noreferrer' : undefined}
                 className="group flex items-center gap-4 rounded-[1.5rem] border border-white/65 bg-white/45 p-4 shadow-[0_8px_24px_rgba(50,100,150,0.04)] backdrop-blur-xl transition hover:border-blue-300"
               >
-                <span className="h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-blue-100">
-                  <img src={resolveAsset(link.image)} alt={link.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                </span>
+                {link.image ? (
+                  <span className="h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-blue-100">
+                    <img src={resolveAsset(link.image)} alt={link.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                  </span>
+                ) : (
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-indigo-200 bg-indigo-100 text-indigo-700 transition group-hover:bg-indigo-600 group-hover:text-white">
+                    {link.icon && <link.icon className="h-6 w-6" />}
+                  </span>
+                )}
                 <span className="min-w-0 flex-1 text-left">
                   <span className="block text-sm font-semibold text-slate-800">{link.title}</span>
                   <span className="mt-1 block text-xs font-medium leading-relaxed text-slate-500">{link.description}</span>
@@ -238,10 +272,21 @@ function StorefrontTab() {
                   <a
                     key={episode.title}
                     href={episode.href}
-                    className="block rounded-2xl bg-white/65 p-3 text-left transition hover:bg-white"
+                    className="flex items-center gap-3 rounded-2xl bg-white/65 p-3 text-left transition hover:bg-white"
                   >
-                    <span className="block text-sm font-semibold text-blue-700">{episode.title}</span>
-                    <span className="mt-1 block text-xs font-medium leading-relaxed text-slate-500">{episode.description}</span>
+                    {episode.cover ? (
+                      <span className="h-14 w-20 shrink-0 overflow-hidden rounded-xl border border-white/70 bg-blue-50">
+                        <img src={resolveAsset(episode.cover)} alt={`${episode.title} cover`} className="h-full w-full object-cover" />
+                      </span>
+                    ) : (
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-blue-700">
+                        <FileText className="h-5 w-5" />
+                      </span>
+                    )}
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold text-blue-700">{episode.title}</span>
+                      <span className="mt-1 block text-xs font-medium leading-relaxed text-slate-500">{episode.description}</span>
+                    </span>
                   </a>
                 ))}
               </div>

@@ -33,6 +33,7 @@ export default function App() {
   const normalizedPath = window.location.pathname.replace(/\/+$/, '');
   const isKolView = normalizedPath === '/kol';
   const isRemotionEpisodeView = normalizedPath === '/kol/series/remotion';
+  const isFotocajaEpisodeView = normalizedPath === '/kol/series/fotocaja';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,6 +80,10 @@ export default function App() {
 
   if (isRemotionEpisodeView) {
     return <KolMarkdownPage markdownPath="/kol/series/remotion.md" />;
+  }
+
+  if (isFotocajaEpisodeView) {
+    return <KolMarkdownPage markdownPath="/kol/series/fotocaja/article.md" />;
   }
 
   return (

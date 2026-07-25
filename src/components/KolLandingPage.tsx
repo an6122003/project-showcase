@@ -142,12 +142,21 @@ const seriesDocuments = [
         description: 'Tạo video bằng React, phù hợp để demo automation và creative coding.',
         href: '/kol/series/remotion',
         cover: '',
+        external: false,
       },
       {
         title: 'Ep2: Fotocaja',
         description: 'App chỉnh sửa ảnh 2D miễn phí, không cần đăng nhập, không thu thập dữ liệu cá nhân.',
         href: '/kol/series/fotocaja',
         cover: '/kol/series/fotocaja/cover.png',
+        external: false,
+      },
+      {
+        title: 'Ep3: Một GPU 32GB có đủ chạy AI cho cả team?',
+        description: 'Benchmark Gemma 4 trên Radeon AI PRO R9700 với tối đa 10 phiên sử dụng đồng thời.',
+        href: 'https://techieslab.app/blog/mot-gpu-32gb-co-du-chay-ai-cho-ca-team',
+        cover: '/kol/series/gpu-team/cover.png',
+        external: true,
       },
     ],
   },
@@ -272,6 +281,8 @@ function StorefrontTab() {
                   <a
                     key={episode.title}
                     href={episode.href}
+                    target={episode.external ? '_blank' : undefined}
+                    rel={episode.external ? 'noopener noreferrer' : undefined}
                     className="flex items-center gap-3 rounded-2xl bg-white/65 p-3 text-left transition hover:bg-white"
                   >
                     {episode.cover ? (

@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22.13.0
           cache: 'npm'
 
       - name: Install dependencies
@@ -33,6 +33,27 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Checkout proposal
+        uses: actions/checkout@v4
+        with:
+          repository: an6122003/kol-proposal
+          path: _proposal-source
+
+      - name: Install proposal dependencies
+        working-directory: _proposal-source
+        run: npm ci
+
+      - name: Build proposal at /proposal
+        working-directory: _proposal-source
+        run: npm run export:pages
+        env:
+          NEXT_PUBLIC_BASE_PATH: /proposal
+
+      - name: Add proposal to the custom-domain site
+        run: |
+          mkdir -p dist/proposal
+          cp -R _proposal-source/out/. dist/proposal/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
